@@ -44,6 +44,13 @@ const gameController = (() => {
     return _checkRows(board) || _checkColumns(board) || _checkDiagonals(board);
   };
 
+  const _checkForDraw = (board) => {
+    for (let i = 0; i < 9; i++) {
+      if (board.getCell(i) === null) return false;
+    }
+    return true;
+  };
+
   const _checkRows = (board) => {
     for (let i = 0; i <= 6; i = i + 3) {
       let row = [];
@@ -93,6 +100,7 @@ const gameController = (() => {
     if (cell === null) {
       gameBoard.setCell(num, _currentPlayer);
       if (_checkForWin(gameBoard)) console.log('WINNER');
+      else if (_checkForDraw(gameBoard)) console.log('DRAW');
       _changeActivePlayer();
       return 1;
     } else {
