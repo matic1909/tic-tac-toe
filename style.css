@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(3, 120px);
+}
+
+.cell {
+  border: none;
+  border-bottom: 3px solid black;
+  border-right: 3px solid black;
+  font-size: 52px;
+  font-weight: 700;
+}
+
+.no-bottom {
+  border-bottom: none;
+}
+
+.no-right {
+  border-right: none;
+}
