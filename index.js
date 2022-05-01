@@ -1,5 +1,5 @@
 const gameBoard = (() => {
-  const _board = new Array(9).fill(null);
+  let _board = new Array(9).fill(null);
 
   const getCell = (num) => _board[num];
 
@@ -7,9 +7,15 @@ const gameBoard = (() => {
     _board[num] = player.getSign();
   };
 
+  const resetBoard = () => {
+    const newBoard = _board.map((cell) => (cell = null));
+    _board = newBoard;
+  };
+
   return {
     getCell,
     setCell,
+    resetBoard,
   };
 })();
 
@@ -109,19 +115,41 @@ const gameController = (() => {
     }
   };
 
+  const restart = () => {
+    gameBoard.resetBoard();
+    _currentPlayer = _player1;
+  };
+
   return {
     getPlayer1,
     getPlayer2,
     getCurrentPlayer,
     move,
+    restart,
   };
 })();
 
 const displayController = (() => {
   const _board = document.querySelectorAll('.cell');
+  const newGameButton = document.querySelector('.new-game-btn');
+
+  newGameButton.addEventListener('click', () => {
+    gameController.restart();
+    _reset();
+  });
 
   const _drawSign = (cell, player) => {
     cell.textContent = player.getSign();
+  };
+
+  const _deleteSign = (cell) => {
+    cell.textContent = '';
+  };
+
+  const _reset = () => {
+    _board.forEach((cell) => {
+      _deleteSign(cell);
+    });
   };
 
   const _initialize = (() => {
