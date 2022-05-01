@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <h1>Tic Tac Toe</h1>
     <div class="container">
-      <h1>Tic Tac Toe</h1>
       <div class="board">
         <button class="cell"></button>
         <button class="cell"></button>
@@ -21,7 +21,11 @@
         <button class="cell no-bottom"></button>
         <button class="cell no-bottom no-right"></button>
       </div>
-      <button class="new-game-btn">New Game</button>
+      <div class="win hidden">
+        <h2>GAME OVER</h2>
+        <p><span class="winner"></span> won!</p>
+        <button class="new-game-btn">New Game</button>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>

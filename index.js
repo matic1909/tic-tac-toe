@@ -105,7 +105,7 @@ const gameController = (() => {
     const cell = gameBoard.getCell(num);
     if (cell === null) {
       gameBoard.setCell(num, _currentPlayer);
-      if (_checkForWin(gameBoard)) console.log('WINNER');
+      if (_checkForWin(gameBoard)) displayController.showWinner(_currentPlayer);
       else if (_checkForDraw(gameBoard)) console.log('DRAW');
       _changeActivePlayer();
       return 1;
@@ -132,6 +132,8 @@ const gameController = (() => {
 const displayController = (() => {
   const _board = document.querySelectorAll('.cell');
   const newGameButton = document.querySelector('.new-game-btn');
+  const winnerDiv = document.querySelector('.win');
+  const winner = document.querySelector('.winner');
 
   newGameButton.addEventListener('click', () => {
     gameController.restart();
@@ -150,6 +152,12 @@ const displayController = (() => {
     _board.forEach((cell) => {
       _deleteSign(cell);
     });
+    winnerDiv.classList.add('hidden');
+  };
+
+  const showWinner = (player) => {
+    winnerDiv.classList.remove('hidden');
+    winner.textContent = player.getSign();
   };
 
   const _initialize = (() => {
@@ -161,4 +169,6 @@ const displayController = (() => {
       });
     });
   })();
+
+  return { showWinner };
 })();
